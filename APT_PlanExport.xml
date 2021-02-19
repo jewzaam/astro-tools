@@ -12,7 +12,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO100</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO100</RunCommand>
 				<WaitCommand>1</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -24,7 +24,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO200</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO200</RunCommand>
 				<WaitCommand>1</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -36,7 +36,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO400</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO400</RunCommand>
 				<WaitCommand>1</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -48,7 +48,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO800</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO800</RunCommand>
 				<WaitCommand>1</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -60,7 +60,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO1600</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO1600</RunCommand>
 				<WaitCommand>0</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -72,7 +72,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO3200</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO3200</RunCommand>
 				<WaitCommand>1</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -84,7 +84,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO6400</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO6400</RunCommand>
 				<WaitCommand>1</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -96,7 +96,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO12800</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO12800</RunCommand>
 				<WaitCommand>1</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -108,7 +108,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO25600</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO25600</RunCommand>
 				<WaitCommand>1</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -120,7 +120,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: DONE</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: DONE</RunCommand>
 				<WaitCommand>0</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -149,7 +149,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% LIGHTS: Start</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% LIGHTS: Start</RunCommand>
 				<WaitCommand>1</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -173,7 +173,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% LIGHTS: In Progress</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% LIGHTS: In Progress</RunCommand>
 				<WaitCommand>1</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -197,7 +197,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% LIGHTS: In Progress</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% LIGHTS: In Progress</RunCommand>
 				<WaitCommand>1</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -221,7 +221,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% LIGHTS: In Progress</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% LIGHTS: In Progress</RunCommand>
 				<WaitCommand>1</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -245,7 +245,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% LIGHTS: In Progress</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% LIGHTS: In Progress</RunCommand>
 				<WaitCommand>1</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -269,7 +269,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% LIGHTS: In Progress</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% LIGHTS: In Progress</RunCommand>
 				<WaitCommand>1</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -293,7 +293,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% LIGHTS: Done</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% LIGHTS: Done</RunCommand>
 				<WaitCommand>1</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -356,7 +356,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test Accuracy: Start</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test Accuracy: Start</RunCommand>
 				<WaitCommand>0</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -416,7 +416,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test Accuracy: 1s Set Complete</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test Accuracy: 1s Set Complete</RunCommand>
 				<WaitCommand>0</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -476,7 +476,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test Accuracy: 2s Set Complete</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test Accuracy: 2s Set Complete</RunCommand>
 				<WaitCommand>0</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -536,7 +536,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test Accuracy: 3s Set Complete</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test Accuracy: 3s Set Complete</RunCommand>
 				<WaitCommand>0</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -596,7 +596,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test Accuracy: 4s Set Complete</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test Accuracy: 4s Set Complete</RunCommand>
 				<WaitCommand>0</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -656,7 +656,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test Accuracy: 5s Set Complete</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test Accuracy: 5s Set Complete</RunCommand>
 				<WaitCommand>0</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
@@ -668,7 +668,7 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\APT\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test Accuracy: Done</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test Accuracy: Done</RunCommand>
 				<WaitCommand>0</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>

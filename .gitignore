@@ -2,3 +2,5 @@ config.yaml
 *.CR2
 *.tiff
 *.jpg
+Camera*
+apt*

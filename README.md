@@ -1,4 +1,4 @@
-# dss info to csv
+# dss-info-to-csv.py
 
 After processing images with DeepSkyStacker, extract metadata from DSS files and the image metadata to CSV.  Also does a histogram normalization and finds the highest percentage peak, useful to see where you'd be on a JPEG (stretched) histogram.
 
@@ -6,12 +6,19 @@ I have used this to review a bunch of shots at various shutter speeds and ISOs t
 
 NOTE I need to enhance with logic now in the APT to Discord script that looks for both under and over exposing in the image.
 
-# APT to Discord
+# APT-to-Discord.py
 
-Astro Photography tool (APT) didn't like running python directly.  But docs reference a vbscript.
-So I wrote a simple wrapper around the python.
+Script to send image information from Astro Photography tool (APT) to a Discord webhook.
+* Message
+* Filename
+* Time remaining in sequence
+* Estimated time sequence will complete
+* PC and camera battery %
+* RAW and stretch histogram %
+* Exposure info (if it's Good, Under exposed, or Over exposed)
+* Stretched JPEG image
 
-Also must install requirements: `pip install -r requirements.txt`
+Must install requirements: `pip install -r requirements.txt`.  See Troubleshooting section.
 
 And you must create a `config.yaml` with your discord webhook.
 
@@ -19,7 +26,13 @@ And you must create a `config.yaml` with your discord webhook.
 webhook_url: https://discord.com/api/webhooks/someLongStringYouGotFromYourWebhook
 ```
 
-## **BEWARE!**
+## APT-to-Discord.vbs
+
+APT didn't like running python directly.  But docs reference a vbscript.
+So I wrote a simple wrapper around the python.
+
+
+## **BEWARE!** of Quotes
 
 APT script editor is crap.  It messes up quotation.  
 For this to work you need to edit the script in the edit plan view.
@@ -63,3 +76,7 @@ I have put all the suggested modulse in requirements.txt so you could also:
 pip uninstall -m requirements.txt
 pip install -m requirements.txt
 ```
+
+# ATP_PlanExport.xml
+
+Just dumping my APT plans so I can get back to older ones if I nuke something by accident.
