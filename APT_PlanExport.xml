@@ -127,6 +127,23 @@
 			</Exposures>
 		</Plan>
 		<Plan>
+			<Name>LIGHTS: Discord Test</Name>
+			<DontDither>1</DontDither>
+			<Vertical>0</Vertical>
+			<Exposures>
+				<Order>1</Order>
+				<Exp>1</Exp>
+				<ISO>100</ISO>
+				<Quality>5</Quality>
+				<Pause>0</Pause>
+				<Count>1</Count>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Discord Test</RunCommand>
+				<WaitCommand>1</WaitCommand>
+				<Filter>-1</Filter>
+				<LensAV></LensAV>
+			</Exposures>
+		</Plan>
+		<Plan>
 			<Name>LIGHTS: ISO_1600 1080@5s#0s</Name>
 			<DontDither>0</DontDither>
 			<Vertical>0</Vertical>

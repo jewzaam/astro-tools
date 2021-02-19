@@ -84,6 +84,7 @@ def log(message):
 
 # Arguments: %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% <message>
 try:
+    log("command line arguments: \"{}\"".format("\", \"".join(sys.argv)))
     argLastFilename=sys.argv[1]
     argCurrExposure=sys.argv[2]
     argEstDuration=sys.argv[3]
@@ -125,9 +126,9 @@ try:
             },
         ],
     }
-    print(payload_json)
+    log("request.json: {}".format(str(payload_json)))
     response = requests.post(mUrl, json=payload_json)
-    print(response.text)
+    log("response: {}".format(str(response.text)))
 
     # Try to send the stretched JPG.. does not yet handle large files so might fail.
     # Send the image separate from the metadata.  Fighting with getting the multipart form working, not worth the time.
@@ -135,6 +136,7 @@ try:
     # https://requests.readthedocs.io/en/master/user/quickstart/#post-a-multipart-encoded-file
     with open(jpg_filename, 'rb') as f:
         # json is ignored if files or data is used, pass in files
+        log("request file: {}".format(jpg_filename))
         response = requests.post(mUrl, files={'file1': f})
         log(response.text)
 except Exception as e:

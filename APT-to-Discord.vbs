@@ -22,9 +22,9 @@ strCommand = strCommand & """"
 
 ' to debug, what command was run
 outFile="APT-to-Discord-vbs.log"
-Set objFile = objFSO.CreateTextFile(outFile,True)
-objFile.Write strCommand & vbCrLf
-objFile.Close
+'Set objFile = objFSO.CreateTextFile(outFile,True)
+'objFile.Write strCommand & vbCrLf
+'objFile.Close
 
 Set oShell = WScript.CreateObject ("WScript.Shell")
 oShell.run strCommand
