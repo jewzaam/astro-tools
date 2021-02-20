@@ -2,6 +2,119 @@
 <Plans>
 	<LightPlans>
 		<Plan>
+			<Name>LIGHTS: 4s Histogram Test</Name>
+			<DontDither>1</DontDither>
+			<Vertical>0</Vertical>
+			<Exposures>
+				<Order>1</Order>
+				<Exp>4</Exp>
+				<ISO>100</ISO>
+				<Quality>5</Quality>
+				<Pause>0</Pause>
+				<Count>1</Count>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 4s Histograms: ISO100</RunCommand>
+				<WaitCommand>1</WaitCommand>
+				<Filter>-1</Filter>
+				<LensAV></LensAV>
+			</Exposures>
+			<Exposures>
+				<Order>2</Order>
+				<Exp>4</Exp>
+				<ISO>200</ISO>
+				<Quality>5</Quality>
+				<Pause>0</Pause>
+				<Count>1</Count>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 4s Histograms: ISO200</RunCommand>
+				<WaitCommand>1</WaitCommand>
+				<Filter>-1</Filter>
+				<LensAV></LensAV>
+			</Exposures>
+			<Exposures>
+				<Order>3</Order>
+				<Exp>4</Exp>
+				<ISO>400</ISO>
+				<Quality>5</Quality>
+				<Pause>0</Pause>
+				<Count>1</Count>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 4s Histograms: ISO400</RunCommand>
+				<WaitCommand>1</WaitCommand>
+				<Filter>-1</Filter>
+				<LensAV></LensAV>
+			</Exposures>
+			<Exposures>
+				<Order>4</Order>
+				<Exp>4</Exp>
+				<ISO>800</ISO>
+				<Quality>5</Quality>
+				<Pause>0</Pause>
+				<Count>1</Count>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 4s Histograms: ISO800</RunCommand>
+				<WaitCommand>1</WaitCommand>
+				<Filter>-1</Filter>
+				<LensAV></LensAV>
+			</Exposures>
+			<Exposures>
+				<Order>5</Order>
+				<Exp>4</Exp>
+				<ISO>1600</ISO>
+				<Quality>5</Quality>
+				<Pause>0</Pause>
+				<Count>1</Count>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 4s Histograms: ISO1600</RunCommand>
+				<WaitCommand>1</WaitCommand>
+				<Filter>-1</Filter>
+				<LensAV></LensAV>
+			</Exposures>
+			<Exposures>
+				<Order>6</Order>
+				<Exp>4</Exp>
+				<ISO>3200</ISO>
+				<Quality>5</Quality>
+				<Pause>0</Pause>
+				<Count>1</Count>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 4s Histograms: ISO3200</RunCommand>
+				<WaitCommand>1</WaitCommand>
+				<Filter>-1</Filter>
+				<LensAV></LensAV>
+			</Exposures>
+			<Exposures>
+				<Order>7</Order>
+				<Exp>4</Exp>
+				<ISO>6400</ISO>
+				<Quality>5</Quality>
+				<Pause>0</Pause>
+				<Count>1</Count>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 4s Histograms: ISO6400</RunCommand>
+				<WaitCommand>1</WaitCommand>
+				<Filter>-1</Filter>
+				<LensAV></LensAV>
+			</Exposures>
+			<Exposures>
+				<Order>8</Order>
+				<Exp>4</Exp>
+				<ISO>12800</ISO>
+				<Quality>5</Quality>
+				<Pause>0</Pause>
+				<Count>1</Count>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 4s Histograms: ISO12800</RunCommand>
+				<WaitCommand>1</WaitCommand>
+				<Filter>-1</Filter>
+				<LensAV></LensAV>
+			</Exposures>
+			<Exposures>
+				<Order>9</Order>
+				<Exp>4</Exp>
+				<ISO>25600</ISO>
+				<Quality>5</Quality>
+				<Pause>0</Pause>
+				<Count>1</Count>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 4s Histograms: ISO25600 & DONE</RunCommand>
+				<WaitCommand>1</WaitCommand>
+				<Filter>-1</Filter>
+				<LensAV></LensAV>
+			</Exposures>
+		</Plan>
+		<Plan>
 			<Name>LIGHTS: 5s Histogram Test</Name>
 			<DontDither>1</DontDither>
 			<Vertical>0</Vertical>
@@ -61,7 +174,7 @@
 				<Pause>0</Pause>
 				<Count>1</Count>
 				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO1600</RunCommand>
-				<WaitCommand>0</WaitCommand>
+				<WaitCommand>1</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
 			</Exposures>
@@ -108,20 +221,8 @@
 				<Quality>5</Quality>
 				<Pause>0</Pause>
 				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO25600</RunCommand>
+				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: ISO25600 & DONE</RunCommand>
 				<WaitCommand>1</WaitCommand>
-				<Filter>-1</Filter>
-				<LensAV></LensAV>
-			</Exposures>
-			<Exposures>
-				<Order>10</Order>
-				<Exp>0</Exp>
-				<ISO>3200</ISO>
-				<Quality>5</Quality>
-				<Pause>0</Pause>
-				<Count>1</Count>
-				<RunCommand>"C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\APT-to-Discord.vbs" %LastFile% %CurrExp% %EDuration% %ETime% %PCBat% %CamBat% %CamSpace% %ExifT% Test 5s Histograms: DONE</RunCommand>
-				<WaitCommand>0</WaitCommand>
 				<Filter>-1</Filter>
 				<LensAV></LensAV>
 			</Exposures>
