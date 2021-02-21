@@ -1,3 +1,22 @@
+# rename-cr2.py
+
+Rough script to take raw files and rename + move them to somewhere else based on EXIF data and some image processing (distinguish lights from darks).  The script is NOT fast as it's processing the raw image data.  It needs to know if a longer exposure is under exposed (a dark) or not (a light).
+
+```script
+rename-cr2.py <Source Base Directory> <Destination Base Directory>
+```
+
+Creates a structure like:
+
+- Camera Name
+  - YYYY-MM-DD
+    - ISOXXXX
+      - *Exposure*s
+        - Dark
+        - Light
+      - Flat
+      - Bias
+
 # dss-info-to-csv.py
 
 After processing images with DeepSkyStacker, extract metadata from DSS files and the image metadata to CSV.  Also does a histogram normalization and finds the highest percentage peak, useful to see where you'd be on a JPEG (stretched) histogram.
