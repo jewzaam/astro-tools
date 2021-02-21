@@ -2,22 +2,22 @@ import os
 from pathlib import Path
 import sys
 import math
-import yaml
+import datetime
 
 # to read tag data
 import exifread
 
-# to get histogram
-from skimage import exposure, filters
+# linear image processing
 import rawpy
 import numpy
 
-if len(sys.argv)<=2:
-    print("usage: {} <input base directory> <output base directory> {}".format(sys.argv[0],"|".join(sys.argv)))
+if len(sys.argv)<=3:
+    print("usage: {} <input base directory> <output base directory> <Target Name>".format(sys.argv[0]))
     sys.exit(-2)
 
 input_base_directory=sys.argv[1]
 output_base_directory=sys.argv[2]
+target_name=sys.argv[3]
 
 raw_ext=["cr2", "tif", "tiff", "fit", "fits", "raw"]
 
@@ -63,23 +63,11 @@ for dirpath, dirnames, filenames in os.walk(input_base_directory):
     for filename in filenames:
         if filename.lower().split('.')[-1] in raw_ext and not filename.lower().startswith("master"):
             psn+=1
-            sys.stdout.write("\rProcessing images: {:01.2f}%".format(math.floor(float(psn)/float(count)*10000.0)/100.0))
+            sys.stdout.write("\rProcessing images: {:01.2f}% ({} of {})".format(math.floor(float(psn-1)/float(count)*10000.0)/100.0,psn,count))
             p=os.path.join(dirpath, filename)
             file_data={
                 "filename": p
             }
-
-            # load histogram and find maximum peak and collect the % of total histogram graph where that shows up
-            raw_hist_p,is_under_exp,is_over_exp,stretch_hist_p=None,None,None,None
-            with rawpy.imread(p) as rawImg:
-                rgbImg=rawImg.raw_image_visible
-                gImg = exposure.adjust_gamma(rgbImg, gamma=1, gain=1)
-                ghImg = exposure.equalize_hist(gImg)
-                nibImg = filters.threshold_niblack(ghImg,window_size=9,k=1)
-
-                # histogram calculations
-                raw_hist_p,is_under_exp,is_over_exp=peak_histogram_percentage(rgbImg)
-                stretch_hist_p,_,_=peak_histogram_percentage(nibImg)
 
             # load image metadata
             with open(p, 'rb') as f:
@@ -100,29 +88,43 @@ for dirpath, dirnames, filenames in os.walk(input_base_directory):
             exp_time=math.ceil(eval(file_data['EXIF ExposureTime'])*10000.0)/10000.0
             #focal_length=file_data['EXIF FocalLength']
             extension=filename.split(".")[-1]
+
+            # for date we want the "night" not actual calendar date, so images are grouped together.
+            # therefore, take the timestamp and subtract 12 hours
+            half_day=datetime.timedelta(hours=12)
+            d=datetime.datetime.strptime(image_datetime, '%Y-%m-%dT%H-%M-%S')
+            image_date=str(d-half_day).split(' ')[0]
+
             image_type=""
-            new_directory="{}\\{}\\{}\\ISO{}".format(output_base_directory,camera_name,image_datetime.split('T')[0].replace(':','-'),iso_speed)
+            new_directory=""
             if exp_time>=1:
+                # identify if it's under exposed so we know if it was a dark
+                # load histogram and find maximum peak and collect the % of total histogram graph where that shows up
+                with rawpy.imread(p) as rawImg:
+                    # histogram calculations
+                    _,is_under_exp,_=peak_histogram_percentage(rawImg.raw_image_visible)
+
+                    if is_under_exp:
+                        image_type="Dark"
+                    else:
+                        image_type="Light"
                 # lights and darks are in seconds, not subseconds, but nuances of timing can make it appear so
                 exp_time=math.floor(exp_time)
-                if is_under_exp:
-                    image_type="Dark"
-                else:
-                    image_type="Light"
                 # bias and flats don't have exposure time in directory but darks and lights do
-                new_directory="{}\\{}s".format(new_directory,exp_time)
+                new_directory="{}\\{}\\{}\\{}\\ISO{}\\{}s\\{}".format(output_base_directory,camera_name,target_name,image_date,iso_speed,exp_time,image_type)
                 # add in the exposure time to filename
-                new_filename="{}_ISO{}_{}_{}s.{}".format(image_type[0],iso_speed,image_datetime,exp_time,extension)
+                new_filename="{}_{}_ISO{}_{}_{}s.{}".format(image_type[0],target_name,iso_speed,image_datetime,exp_time,extension)
             else:
                 if exp_time<1.0/1000.0:
                     image_type="Bias"
+                    # bias isn't specific to the shoot.  if I got them we care about the camera, iso, and date (not time) only
+                    new_directory="{}\\{}\\{}+ISO{}+{}".format(output_base_directory,camera_name,image_type,iso_speed,image_date)
                 else:
                     image_type="Flat"
+                    # flats matter for camera, date, and iso
+                    new_directory="{}\\{}\\{}\\{}\\{}+ISO{}".format(output_base_directory,camera_name,image_date,image_type,iso_speed)
                 new_filename="{}_ISO{}_{}.{}".format(image_type[0],iso_speed,image_datetime,extension)
             
-            # add the type to the directory
-            new_directory+="\\"+image_type
-
             # create the new directory
             Path(new_directory).mkdir(parents=True,exist_ok=True)
 
