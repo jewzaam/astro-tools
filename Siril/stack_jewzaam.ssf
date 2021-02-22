@@ -1,0 +1,53 @@
+############################################
+# Script for Siril 1.0
+# July 2020
+# (C) Cyril Richard
+# Preprocessing v1.0
+########### PREPROCESSING SCRIPT ###########
+# Script for color camera preprocessing
+# needs 4 sets of RAW images in the working
+# directory, within 4 directories:
+# biases, flats, darks and lights 
+#
+############################################
+
+requires 0.99.4
+
+#build master-bias
+cd BIAS
+convert bias -out=../process
+cd ../process
+stack bias rej 3 3 -nonorm
+cd ..
+
+#preprocess flats
+cd FLATS
+convert flat -out=../process
+cd ../process
+preprocess flat -bias=bias_stacked
+
+#build master-flat
+stack pp_flat rej 3 3 -norm=mul
+cd ..
+
+#build master-dark
+cd DARKS
+convert dark -out=../process
+cd ../process
+stack dark rej 3 3 -nonorm
+cd ..
+
+#preprocess lights
+cd LIGHTS
+convert light -out=../process
+cd ../process
+preprocess light -dark=dark_stacked -flat=pp_flat_stacked -cfa -equalize_cfa -debayer
+
+#align lights
+register pp_light
+
+#stack calibrated lights
+stack r_pp_light rej 3 3 -norm=addscale -output_norm -out=../result
+
+cd ..
+close

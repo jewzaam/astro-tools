@@ -73,7 +73,14 @@ def process_file(dirpath, filename):
     # BIAS: if exposure < 1/1000 second
     # FLATS: if exposure 
 
-    camera_name=file_data['Image Model']
+    try:
+        camera_name=file_data['Image Model']
+    except:
+        # if we can't load the camera name skip the file
+        print("") # becuase progress is printed without line feed, get a clear line first
+        print("WARNING: unable to find camera information in '{}\{}'".format(dirpath,filename))
+        return
+
     image_datetime=file_data['EXIF DateTimeOriginal'].replace(' ','T').replace(':','-')
     iso_speed=file_data['EXIF ISOSpeedRatings']
     exp_time=math.ceil(eval(file_data['EXIF ExposureTime'])*10000.0)/10000.0
@@ -126,7 +133,7 @@ def process_file(dirpath, filename):
 src_file_list=[]
 for dirpath, dirnames, filenames in os.walk(input_base_directory):
     for filename in filenames:
-        if filename.lower().split('.')[-1] in raw_ext and not filename.lower().startswith("master"):
+        if filename.lower().split('.')[-1] in raw_ext and not filename.lower().startswith("master") and not filename.lower().startswith("autosave"):
             src_file_list.append([dirpath, filename])
 
 # process each file
@@ -138,7 +145,11 @@ for x in src_file_list:
     filename=x[1]
     psn+=1
     sys.stdout.write("\rProcessing images: {:01.2f}% ({} of {})".format(math.floor(float(psn-1)/float(count)*10000.0)/100.0,psn,count))
-    process_file(dirpath, filename)
+    try:
+        process_file(dirpath, filename)
+    except Exception as e:
+        print("ERROR: unable to process file {} / {}".format(dirpath,filename))
+        raise e
 
 # walk the source dir and find empty directories
 for dirpath, dirnames, filenames in os.walk(input_base_directory):
