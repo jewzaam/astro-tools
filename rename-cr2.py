@@ -152,6 +152,8 @@ for x in src_file_list:
         raise e
 
 # walk the source dir and find empty directories
+# print one empty line (since we're not doing a line feed for the move portion of this script)
+print("")
 for dirpath, dirnames, filenames in os.walk(input_base_directory):
     if len(filenames)==0 and len(dirnames)==0 and dir!=input_base_directory:
         print("Directory is empty now: {}".format(dirpath))
