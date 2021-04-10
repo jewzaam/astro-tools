@@ -3,10 +3,6 @@ from pathlib import Path
 import sys
 import math
 import datetime
-import ntpath
-
-# process images in parallel.. faster
-from multiprocessing import Process
 
 # to read tag data
 import exifread
@@ -71,8 +67,7 @@ def process_file(dirpath, filename):
     # LIGHTS: if exposure >= 1 second and there is data (peak is > bin 1/100) 
     # DARKS: if exposure >= 1 second and it is not LIGHTS
     # BIAS: if exposure < 1/1000 second
-    # FLATS: if exposure 
-
+    # FLATS: if exposure < 1 second but > 1/1000 second
     try:
         camera_name=file_data['Image Model']
     except:
@@ -148,11 +143,11 @@ for x in src_file_list:
     try:
         process_file(dirpath, filename)
     except Exception as e:
+        print("")
         print("ERROR: unable to process file {} / {}".format(dirpath,filename))
         raise e
 
 # walk the source dir and find empty directories
-# print one empty line (since we're not doing a line feed for the move portion of this script)
 print("")
 for dirpath, dirnames, filenames in os.walk(input_base_directory):
     if len(filenames)==0 and len(dirnames)==0 and dir!=input_base_directory:

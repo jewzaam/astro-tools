@@ -99,3 +99,12 @@ pip install -m requirements.txt
 # ATP_PlanExport.xml
 
 Just dumping my APT plans so I can get back to older ones if I nuke something by accident.
+
+# Help!  DSS Stack Info Lost!?
+
+I typically save the DSS file list before I stack.  Sometimes I forget to save after applying some score threshold.  If DSS hasn't shutdown for _reasons_ it can be recovered.  In the directory of your lights you'll find a text file with the word "stack" in it.  In that directory run this to get a count of the light frames stacked.  Since I save the file list I have the darks, flats, and bias.  Or I can look at the source directories as they are all included.
+
+```
+> findstr /c:"CR2" *stack* | find /c /v "GarbageStringDefNotInYourResults"
+709
+```

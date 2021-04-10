@@ -1,0 +1,1 @@
+python "C:\Users\jewza\Dropbox\Family Room\Astrophotography\astro-tools\NINA-to-Discord.py" %*

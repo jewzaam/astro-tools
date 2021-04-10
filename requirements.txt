@@ -5,3 +5,5 @@ rawpy==0.16.0
 numpy
 pyyaml
 exifread
+pywin32
+prometheus-client
