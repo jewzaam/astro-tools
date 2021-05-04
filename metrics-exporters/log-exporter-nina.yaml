@@ -1,0 +1,295 @@
+initialize:
+- metric: nina_status{category="Utility",item="MessageBox"}
+  type: gauge
+  value: 0
+metrics:
+- name: nina_total
+  rules:
+  - op: inc
+    regex: .*
+  type: counter
+- labels:
+    type:
+      regex: .*[|]Successfully connected ([^.]+)[.].*
+  name: nina_equipment
+  rules:
+  - op: set
+    regex: ^.*Successfully connected.*
+    value: 1
+  type: gauge
+- labels:
+    type:
+      regex: .*[|]Disconnected (.+)$
+  name: nina_equipment
+  rules:
+  - op: set
+    regex: .*[|]Disconnected .*
+    value: 0
+  type: gauge
+- labels:
+    category:
+      regex: ".*(?:Starting|Finishing) Category: ([^,]+),.*"
+    item:
+      regex: ".*(?:Starting|Finishing) Category: [^,]+, Item: ([^,]+)"
+  name: nina_status
+  rules:
+  - op: set
+    regex: .*[|]Run[|].*Starting Category.*
+    value: 1
+  type: gauge
+- labels:
+    category:
+      regex: ".*(?:Starting|Finishing) Category: ([^,]+),.*"
+    item:
+      regex: ".*(?:Starting|Finishing) Category: [^,]+, Item: ([^,]+)"
+  name: nina_status
+  rules:
+  - op: set
+    regex: .*[|]Run[|].*Finishing Category.*
+    value: 0
+  type: gauge
+# Special cases, Center to clear CenterAndRotate and visa versa
+- labels:
+    category:
+      regex: ".*(?:Starting|Finishing) Category: ([^,]+),.*"
+    item:
+      value: CenterAndRotate
+  name: nina_status
+  rules:
+  - op: set
+    regex: ".*[|]Run[|].*Finishing Category.*Item: Center.*"
+    value: 0
+  type: gauge
+- labels:
+    category:
+      regex: ".*(?:Starting|Finishing) Category: ([^,]+),.*"
+    item:
+      value: Center
+  name: nina_status
+  rules:
+  - op: set
+    regex: ".*[|]Run[|].*Finishing Category.*Item: Center.*"
+    value: 0
+  type: gauge
+- labels:
+    time:
+      regex: ".*Exposure Time:? ([^;]*);"
+    filter:
+      regex: ".*Filter:? ([^;]*);"
+    gain:
+      regex: ".*Gain:? ([^;]*);"
+    offset:
+      regex: ".*Offset:? ([^;]*);"
+    binning:
+      regex: ".*Binning:? ([^;]*);"
+  name: nina_exposure
+  rules:
+  - op: inc
+    regex: .*[|]Capture[|].*Starting Exposure.*
+  type: counter
+- labels:
+    type:
+      value: HFR
+  name: nina_detect
+  rules:
+  - op: set
+    regex: ".*[|]Detect[|].*Average HFR: ([^,]+),.*"
+  type: gauge
+- labels:
+    type:
+      value: stars
+  name: nina_detect
+  rules:
+  - op: set
+    regex: .*[|]Detect[|].*Detected Stars ([0-9]+)$
+  type: gauge
+- labels:
+    category:
+      value: "Telescope"
+    item:
+      value: "MeridianFlip"
+  name: nina_status
+  rules:
+  - op: set
+    regex: ".*Meridian Flip - Initializing Meridian Flip.*"
+    value: 1
+  type: gauge
+- labels:
+    category:
+      value: "Telescope"
+    item:
+      value: "MeridianFlip"
+  name: nina_status
+  rules:
+  - op: set
+    regex: ".*Meridian Flip - Resuming Autoguider.*"
+    value: 0
+  type: gauge
+- labels:
+    module:
+      regex: .*[|]ERROR[|]([^|]+)[|].*
+    type:
+      regex: .*[|]ERROR[|][^|]+[|]([^|]+)[|].*
+    code:
+      regex: .*[|]ERROR[|].* ([^ ]+)$
+  name: nina_error
+  rules:
+  - op: inc
+    regex: .*[|]ERROR[|].*
+  type: counter
+- labels:
+    module:
+      regex: .*[|]ERROR[|]([^|]+)[|].*
+    type:
+      regex: .*[|]ERROR[|][^|]+[|]([^|]+)[|].*
+    code:
+      regex: .*[|]ERROR[|].* ([^ ]+)$
+  name: nina_error
+  rules:
+  - op: inc
+    regex: .*[|]ERROR[|].*
+  type: counter
+# clear status gauges of importance when sequence is cancelled
+- labels:
+    category:
+      value: "* Instruction Set *"
+    item:
+      value: "Center"
+  name: nina_status
+  rules:
+  - op: set
+    regex: ".*Sequence run was cancelled.*"
+    value: 0
+  type: gauge
+- labels:
+    category:
+      value: "* Instruction Set *"
+    item:
+      value: "CenterAndRotate"
+  name: nina_status
+  rules:
+  - op: set
+    regex: ".*Sequence run was cancelled.*"
+    value: 0
+  type: gauge
+- labels:
+    category:
+      value: "* Instruction Set *"
+    item:
+      value: "NINA.Sequencer.Container.DeepSkyObjectContainer"
+  name: nina_status
+  rules:
+  - op: set
+    regex: ".*Sequence run was cancelled.*"
+    value: 0
+  type: gauge
+- labels:
+    category:
+      value: "* Instruction Set *"
+    item:
+      value: "NINA.Sequencer.Container.ParallelContainer"
+  name: nina_status
+  rules:
+  - op: set
+    regex: ".*Sequence run was cancelled.*"
+    value: 0
+  type: gauge
+- labels:
+    category:
+      value: "* Instruction Set *"
+    item:
+      value: "NINA.Sequencer.Container.SequentialContainer"
+  name: nina_status
+  rules:
+  - op: set
+    regex: ".*Sequence run was cancelled.*"
+    value: 0
+  type: gauge
+- labels:
+    category:
+      value: "* Instruction Set *"
+    item:
+      value: "NINA.Sequencer.Container.TargetAreaContainer"
+  name: nina_status
+  rules:
+  - op: set
+    regex: ".*Sequence run was cancelled.*"
+    value: 0
+  type: gauge
+- labels:
+    category:
+      value: "* Instruction Set *"
+    item:
+      value: "NINA.Sequencer.Container.EndAreaContainer"
+  name: nina_status
+  rules:
+  - op: set
+    regex: ".*Sequence run was cancelled.*"
+    value: 0
+  type: gauge
+- labels:
+    category:
+      value: "* Instruction Set *"
+    item:
+      value: "NINA.Sequencer.Container.SequenceRootContainer"
+  name: nina_status
+  rules:
+  - op: set
+    regex: ".*Sequence run was cancelled.*"
+    value: 0
+  type: gauge
+- labels:
+    category:
+      value: "* Instruction Set *"
+    item:
+      value: "NINA.Sequencer.Container.StartAreaContainer"
+  name: nina_status
+  rules:
+  - op: set
+    regex: ".*Sequence run was cancelled.*"
+    value: 0
+  type: gauge
+- labels:
+    category:
+      value: "Camera"
+    item:
+      value: "CoolCamera"
+  name: nina_status
+  rules:
+  - op: set
+    regex: ".*Sequence run was cancelled.*"
+    value: 0
+  type: gauge
+- labels:
+    category:
+      value: "Camera"
+    item:
+      value: "WarnCamera"
+  name: nina_status
+  rules:
+  - op: set
+    regex: ".*Sequence run was cancelled.*"
+    value: 0
+  type: gauge
+- labels:
+    category:
+      value: "Camera"
+    item:
+      value: "TakeExposure"
+  name: nina_status
+  rules:
+  - op: set
+    regex: ".*Sequence run was cancelled.*"
+    value: 0
+  type: gauge
+- labels:
+    category:
+      value: "Camera"
+    item:
+      value: "NINA.Sequence.SequenceItem.Imaging.TakeManyExposures"
+  name: nina_status
+  rules:
+  - op: set
+    regex: ".*Sequence run was cancelled.*"
+    value: 0
+  type: gauge

@@ -2,6 +2,11 @@ common_labels:
   profile:
     regex: ^Equipment Profile = (.+)
 metrics:
+- name: phd2_total
+  rules:
+  - op: inc
+    regex: .*
+  type: counter
 - labels:
     binning:
       regex: .*, Binning = ([^,]+),.*

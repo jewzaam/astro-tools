@@ -26,13 +26,13 @@ def findNewestFile(directory, logfileregex):
     return s[-1][1]
 
 def watchDirectory(logdir, logfileregex, frequencySeconds, callback):
-    newestLogFile = findNewestFile(logdir, logfileregex)
-    while newestLogFile is None:
-        time.sleep(frequencySeconds)
-        newestLogFile = findNewestFile(logdir, logfileregex)
-
-    currentLogFile = newestLogFile
     while True:
+        newestLogFile = findNewestFile(logdir, logfileregex)
+        while newestLogFile is None:
+            time.sleep(frequencySeconds)
+            newestLogFile = findNewestFile(logdir, logfileregex)
+
+        currentLogFile = newestLogFile
         try:
             print("Loading log file: {}".format(currentLogFile))
             with open(currentLogFile, 'r') as f:
@@ -42,13 +42,16 @@ def watchDirectory(logdir, logfileregex, frequencySeconds, callback):
                     if not line:
                         time.sleep(frequencySeconds)
                         newestLogFile = findNewestFile(logdir, logfileregex)
-                        if newestLogFile != currentLogFile:
-                            currentLogFile = newestLogFile
+                        if newestLogFile is None or newestLogFile != currentLogFile:
+                            # either the newest file is too old or there is a new file
+                            # in either case, bail the inner loop so we get a fresh state from outer loop
                             break
+
                         f.seek(where)
                     else:
                         callback(line)
         except Exception as e:
+            # print the error and try again with a delay (so it's not a hot fail lop)
             print(e)
             time.sleep(frequencySeconds)
             pass

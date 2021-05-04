@@ -1,6 +1,7 @@
 import win32com.client
 import time
 import prometheus_client
+import argparse
 
 import utility
 
@@ -8,13 +9,13 @@ import utility
 
 REQUEST_TIME = prometheus_client.Summary('request_processing_seconds', 'Time spent processing request')
 
-METRICS_PORT = 8000
-
 METRICS_FREQUENCY_SECONDS = 2
 
 drivers = {
     "switch": "ASCOM.pegasus_upb.Switch",
     "telescope": "ASCOM.DeviceHub.Telescope",
+    "camera1": "ASCOM.ASICamera2.Camera",
+    "camera2": "ASCOM.ASICamera2_2.Camera",
 }
 
 devices = {}
@@ -149,14 +150,139 @@ def getMetrics_Telescope():
 
     utility.inc("ascom_telescope_total", {"name": data['name']})
 
+def getMetrics_Camera(device):
+    # https://ascom-standards.org/Help/Developer/html/T_ASCOM_DriverAccess_Camera.htm
+
+    try:
+        # print error if cannot connect but don't cause things to fail
+        camera = getDevice(device)
+        camera.Connected = True
+    except Exception as e:
+        print(e)
+        return
+
+    if not camera.Connected:
+        return
+    
+    # collect all the data up front
+    data = {}
+    try:
+        data["bin_x"] = camera.BinX
+    except Exception as e:
+        print(e)
+
+    try:
+        data["bin_Y"] = camera.BinY
+    except Exception as e:
+        print(e)
+
+    try:
+        data["camera_state"] = camera.CameraState
+    except Exception as e:
+        print(e)
+
+    try:
+        data["ccd_temperature"] = camera.CCDTemperature
+    except Exception as e:
+        print(e)
+
+    try:
+        data["can_abort_exposure"] = camera.CanAbortExposure
+    except Exception as e:
+        print(e)
+
+    try:
+        data["can_pulse_guide"] = camera.CanPulseGuide
+    except Exception as e:
+        print(e)
+
+    try:
+        data["can_set_ccd_temperature"] = camera.CanSetCCDTemperature
+    except Exception as e:
+        print(e)
+
+    try:
+        data["can_stop_exposure"] = camera.CanStopExposure
+    except Exception as e:
+        print(e)
+
+    try:
+        data["cooler_on"] = camera.CoolerOn
+    except Exception as e:
+        print(e)
+
+    try:
+        data["cooler_power"] = camera.CoolerPower
+    except Exception as e:
+        print(e)
+
+    try:
+        data["electrons_per_adu"] = camera.ElectronsPerADU
+    except Exception as e:
+        print(e)
+
+    try:
+        data["gain"] = camera.Gain
+    except Exception as e:
+        print(e)
+
+    try:
+        data["has_shutter"] = camera.HasShutter
+    except Exception as e:
+        print(e)
+
+    try:
+        data["is_pulse_guiding"] = camera.IsPulseGuiding
+    except Exception as e:
+        print(e)
+
+    try:
+        data["name"] = camera.Name
+    except Exception as e:
+        print(e)
+
+    try:
+        data["offset"] = camera.Offset
+    except Exception as e:
+        print(e)
+
+    name=data['name']
+
+    for key in ['electrons_per_adu','gain','offset','bin_x','bin_Y','camera_state','cooler_power','ccd_temperature']:
+        if key in data:
+            utility.set("ascom_camera_data", data[key], {"name": name, "type": key})
+
+    for key in ['cooler_on','can_abort_exposure','can_pulse_guide','can_set_ccd_temperature','can_stop_exposure','has_shutter','image_ready','is_pulse_guiding']:
+        if key in data and data[key]:
+            utility.set("ascom_camera_status", 1, {"name": name, "type": key})
+        else:
+            utility.set("ascom_camera_status", 0, {"name": name, "type": key})
+
+    utility.inc("ascom_camera_total", {
+        "name": name,
+    })
+
 @REQUEST_TIME.time()
 def getMetrics():
     getMetrics_Switch()
     getMetrics_Telescope()
+    getMetrics_Camera("camera1")
+    getMetrics_Camera("camera2")
+
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="Export logs as prometheus metrics.")
+    parser.add_argument("--port", type=int, help="port to expose metrics on")
+    parser.add_argument("--choose", type=str, help="device to choose, string is printed to stdout")
+    
+    args = parser.parse_args()
+
+    if args.choose:
+        chooseDriver(args.choose)
+        exit()
+    
     # Start up the server to expose the metrics.
-    prometheus_client.start_http_server(METRICS_PORT)
+    prometheus_client.start_http_server(args.port)
     # Generate some requests.
     while True:
         getMetrics()
