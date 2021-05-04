@@ -6,6 +6,7 @@ import time
 import requests
 import json
 import yaml
+import re
 
 METRICS_FREQUENCY_SECONDS=60
 
@@ -16,8 +17,7 @@ def getCurrentWeather(config):
     lat = config['location']['latidude']
     long = config['location']['longitude']
     api_key = config['openweathermap']['api_key']
-    response = requests.get("http://api.openweathermap.org/data/2.5/weather?appid={}&lat={}&lon={}".format(api_key,lat,long))
-    # TODO convert http://api.openweathermap.org/data/2.5/onecall?appid={}&lat={}&lon={}&exclude=minutely,daily&units=metric
+    response = requests.get("http://api.openweathermap.org/data/2.5/onecall?appid={}&lat={}&lon={}&exclude=minutely,daily&units=metric".format(api_key,lat,long))
 
     if response.status_code != 200 or response.text is None or response.text == '':
         utility.inc("openweathermap_error_total")
@@ -25,134 +25,130 @@ def getCurrentWeather(config):
         data = json.loads(response.text)
 
         global_labels={
-            "latitude": data['coord']['lat'],
-            "longitude": data['coord']['lon'],
+            "latitude": data['lat'],
+            "longitude": data['lon'],
         }
 
         utility.inc("openweathermap_success_total", global_labels)
 
-        # note we have to clear any gauges we don't get data for.
-        for key in label_cache: # check for any keys
-            if key not in data: # that are not in current root of data set
-                for l in label_cache[key]:
-                    utility.set("openweathermap_{}".format(key),None,l)
-                    # https://stackoverflow.com/questions/11277432/how-can-i-remove-a-key-from-a-python-dictionary
-                # done processing, pop the cache so we don't keep doing this
-                _ = label_cache.pop(key, None)
+        print(data)
 
-        for key in data:
-            temp=None
-            humidity=None
+        if 'current' in data:
+            current = data['current']
 
-            if key=='main':
-                if 'temp' in data[key]:
-                    l={"type": "current", "unit": "kelvin"}
+            # note we have to clear any gauges we don't get data for.
+            for key in label_cache: # check for any keys
+                if key not in current and key not in ['pop','rain','snow']: # that are not in current root of data set except precipitation
+                    for l in label_cache[key]:
+                        utility.set("openweathermap_{}".format(key),None,l)
+                        # https://stackoverflow.com/questions/11277432/how-can-i-remove-a-key-from-a-python-dictionary
+                    # done processing, pop the cache so we don't keep doing this
+                    _ = label_cache.pop(key, None)
+            
+            # process all the keys
+            for key in current:
+                value=current[key]
+                if key=='temp':
+                    l={"type": "current", "unit": "celsius"}
                     l.update(global_labels)
-                    temp=data[key]['temp']
-                    utility.set("openweathermap_temperature",temp,l)
-                if 'feels_like' in data[key]:
-                    l={"type": "feels_like", "unit": "kelvin"}
+                    utility.set("openweathermap_temperature",value,l)
+                if key=='feels_like':
+                    l={"type": "feels_like", "unit": "celsius"}
                     l.update(global_labels)
-                    utility.set("openweathermap_temperature",data[key]['feels_like'],l)
-                if 'temp_min' in data[key]:
-                    l={"type": "min", "unit": "kelvin"}
-                    l.update(global_labels)
-                    utility.set("openweathermap_temperature",data[key]['temp_min'],l)
-                if 'temp_max' in data[key]:
-                    l={"type": "max", "unit": "kelvin"}
-                    l.update(global_labels)
-                    utility.set("openweathermap_temperature",data[key]['temp_max'],l)
-                if 'pressure' in data[key]:
+                    utility.set("openweathermap_temperature",value,l)
+                if key=='pressure':
                     l={"unit": "millibars"}
                     l.update(global_labels)
-                    utility.set("openweathermap_pressure",data[key]['pressure'],l)
-                if 'humidity' in data[key]:
+                    utility.set("openweathermap_{}".format(key),value,l)
+                if key=='humidity':
                     l={"unit": "percent"}
                     l.update(global_labels)
-                    humidity=data[key]['humidity']
-                    utility.set("openweathermap_humidity",humidity,l)
-
-            # if we have temp and humidity calculate dew point
-            # what sucks is humidity is based on C or F (not sure how much it matters) but NOT K!
-            # so why do they have it as % and not dew point?!?  so stupid...
-            if temp is not None and humidity is not None:
-                # convert temp to C
-                temp_c=temp-273.15
-                # calculate dew point in C
-                dew_point_k=temp_c*(humidity/100.0)+273.15
-                l={"unit": "kelvin"}
-                l.update(global_labels)
-                utility.set("openweathermap_dew_point",dew_point_k,l)
-
-            if key=='visibility':
-                l={"unit": "meters"}
-                l.update(global_labels)
-                utility.set("openweathermap_{}".format(key),data[key],l)
-
-            if key=='wind':
-                for x in data[key]:
-                    l={"type": x, "unit": "mph"}
+                    utility.set("openweathermap_{}".format(key),value,l)
+                if key=='dew_point':
+                    l={"unit": "celsius"}
                     l.update(global_labels)
-                    if x == 'deg':
-                        l['unit'] = "degree"
-                        l['type'] = "direction"
-                    utility.set("openweathermap_{}".format(key),data[key][x],l)
-
-            if key=='clouds':
-                for x in data[key]:
-                    l={"type": x, "unit": "percent"}
+                    utility.set("openweathermap_{}".format(key),value,l)
+                if key=='visibility':
+                    l={"unit": "meters"}
                     l.update(global_labels)
-                    utility.set("openweathermap_{}".format(key),data[key][x],l)
-
-            if key=='pop':
-                # pop = probability of precipitation
-                l={"unit": "percent"}
-                l.update(global_labels)
-                utility.set("openweathermap_{}".format(key),data[key*100],l)
-                label_cache[key]=[l] # we need an array for the label cache, pop has a single entry
-
-            if key=='rain':
-                label_cache[key]=[]
-                for x in data[key]:
-                    l={"type": x, "unit": "mm"}
+                    utility.set("openweathermap_{}".format(key),value,l)
+                if key=='clouds':
+                    l={"unit": "percent"}
                     l.update(global_labels)
-                    utility.set("openweathermap_{}".format(key),data[key][x],l)
-                    label_cache[key].append(l)
-            
-            if key=='snow':
-                label_cache[key]=[]
-                for x in data[key]:
-                    l={"type": x, "unit": "mm"}
+                    utility.set("openweathermap_{}".format(key),value,l)
+                m = re.match('^wind_(.*)', key)
+                if m:
+                    t=m.groups()[0]
+                    unit="kph"
+                    if t=='deg':
+                        t="direction"
+                        unit="degree"
+                    l={"type": t, "unit": unit}
                     l.update(global_labels)
-                    utility.set("openweathermap_{}".format(key),data[key][x],l)
-                    label_cache[key].append(l)
+                    utility.set("openweathermap_wind",value,l)
 
-            if key=='dt':
-                l={"type": "current", "unit": "second"}
-                l.update(global_labels)
-                utility.set("openweathermap_time",int(data[key]),l)
+                if key=='dt':
+                    l={"type": "current", "unit": "second"}
+                    l.update(global_labels)
+                    utility.set("openweathermap_time",int(value),l)
 
-            if key=='sys':
-                now=time.time()
-                if 'sunrise' in data[key]:
+                if key=='sunrise':
+                    now=time.time()
                     l={"type": "sunrise", "unit": "second"}
                     l.update(global_labels)
                     # api returns data per day.  if sunrise is too far in the past we can't do useful alerts.
                     # therefore if sunrise is more than 12 housr ago move it forward 1 day
                     # this is rough, but so is astronomical sunrise and sunset.. just needs to be good enough for alerts
-                    sunrise=data[key]['sunrise']
+                    sunrise=value
                     if sunrise<(now-12*60*60):
                         sunrise += 24*60*60
                     utility.set("openweathermap_time",int(sunrise),l)
                     l['type'] = 'astronomical_sunrise'
                     utility.set("openweathermap_time",int(sunrise)-20.0/360.0*float(60*60*24),l)
-                if 'sunset' in data[key]:
+                if key=='sunset':
                     l={"type": "sunset", "unit": "second"}
                     l.update(global_labels)
                     # note unlike sunrise the sunset does not need to be adjusted.  API will flip to next day at midnight
-                    utility.set("openweathermap_time",int(data[key]['sunset']),l)
+                    utility.set("openweathermap_time",int(value),l)
                     l['type'] = 'astronomical_sunset'
-                    utility.set("openweathermap_time",int(data[key]['sunset'])+20.0/360.0*float(60*60*24),l)
+                    utility.set("openweathermap_time",int(value)+20.0/360.0*float(60*60*24),l)
+
+            # probability of precepitation (pop), rain, and snow are in the hourly forecast.  Just get the first entry.
+            # TODO something more elegant than these individual booleans..
+            found_hourly={
+                'pop': False,
+                'rain': False,
+                'snow': False,
+            }
+            if 'hourly' in data and len(data['hourly']) > 0:
+                for key in data['hourly'][0]:
+                    if key=='pop':
+                        found_hourly[key]=True
+                        value=data['hourly'][0][key]
+                        l={"unit": "percent"}
+                        l.update(global_labels)
+                        # inconsistency in data types, this is a percentage from 0.0 to 1.0
+                        utility.set("openweathermap_{}".format(key),value*100,l)
+                        if key not in label_cache:
+                            label_cache[key]=[]
+                        label_cache[key].append(l)
+                    if key=='rain' or key=='snow':
+                        found_hourly[key]=True
+                        values=data['hourly'][0][key]
+                        for x in values:
+                            l={"type": x, "unit": "mm"}
+                            l.update(global_labels)
+                            utility.set("openweathermap_{}".format(key),values[x],l)
+                            if key not in label_cache:
+                                label_cache[key]=[]
+                            label_cache[key].append(l)
+            for key in found_hourly:
+                if not found_hourly[key] and key in label_cache:
+                    # we didn't find it in the data and we have it cached, so wipe metric
+                    for l in label_cache[key]:
+                        utility.set("openweathermap_{}".format(key),None,l)
+                    _ = label_cache.pop(key, None)
+
 
 
 if __name__ == '__main__':
