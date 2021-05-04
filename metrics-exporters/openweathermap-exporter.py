@@ -7,8 +7,6 @@ import requests
 import json
 import yaml
 
-OWM_APIKEY="d25e30bc8f75ed10708fae36ffae6df2"
-
 METRICS_FREQUENCY_SECONDS=60
 
 # cache for labels we may need to clear later, key is the metric from OWM (i.e. rain, snow, pop)
