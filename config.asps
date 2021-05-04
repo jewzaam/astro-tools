@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Settings>
+  <General>
+    <FocalLength>1000</FocalLength>
+    <PixelSize>7.40</PixelSize>
+    <IgnoreFitsPixel>False</IgnoreFitsPixel>
+    <IgnoreFitsFocalLength>False</IgnoreFitsFocalLength>
+    <AutoSyncMount>False</AutoSyncMount>
+    <CameraType>0</CameraType>
+    <Seconds>5</Seconds>
+    <Binning>2</Binning>
+    <FilterIndex>0</FilterIndex>
+    <SubframeIndex>2</SubframeIndex>
+    <AngleMode>1</AngleMode>
+    <CoordType>1</CoordType>
+  </General>
+</Settings>
+
